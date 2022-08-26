@@ -24,6 +24,14 @@ app.get('/tasks',(req,res)=> {
     })
 })
 
+app.post('/updateTask/:taskid',(req,res) => {
+    const UPDATE_QUERY = `UPDATE todotaskmanager.tasks SET taskstatus = 1 WHERE taskid=${req.params.taskid}`;
+    connection.query(UPDATE_QUERY, (err)=>{
+        if (err) console.log(err)
+        else res.send('Your task has been updated')
+    })
+})
+
 app.post('/addTask',(req,res)=> {
     // This is adding query with SQL
     const ADD_QUERY = `insert into todotaskmanager.tasks (task) values ('${req.body.task}')`
