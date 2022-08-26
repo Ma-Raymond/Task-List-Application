@@ -33,8 +33,13 @@ app.post('/addTask',(req,res)=> {
     })
 })
 
-app.get('/deleteTask',(req,res)=> {
-    res.send('Deleted Task')
+// make sure to follow the app.____ because it matter when calling axios.____
+app.delete('/deleteTask/:taskid',(req,res)=> {
+    const DELETE_QUERY = `DELETE FROM todotaskmanager.tasks where (taskid=${req.params.taskid})`// You have to to req.params for requesting the taskid
+    connection.query(DELETE_QUERY, (err,response)=>{
+        if (err) console.log(err)
+        else res.send("Task has been deleted")
+    })
 })
 
 app.listen(4000,()=>{
